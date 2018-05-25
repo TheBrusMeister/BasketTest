@@ -6,7 +6,7 @@ namespace ShoppingBasket.Entities
 {
     public class Basket
     {
-        private List<Product> basketContents;
+        internal List<Product> basketContents;
         private double basketPrice;
 
         public double GetBasketPrice()
@@ -19,7 +19,7 @@ namespace ShoppingBasket.Entities
             basketPrice = value;
         }
 
-        public List<Product> GetBasketContents()
+        internal List<Product> GetBasketContents()
         {
             return basketContents;
         }
