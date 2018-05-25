@@ -31,7 +31,7 @@ namespace ShoppingBasket.Entities
 
         public void Checkout(GiftVoucher giftVoucher)
         {
-            
+
         }
     }
 }
