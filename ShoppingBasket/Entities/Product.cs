@@ -39,12 +39,12 @@ namespace ShoppingBasket.Entities
 
         public bool GetIsGiftVoucherProduct1()
         {
-            return IsGiftVoucherProduct;
+            return isGiftVoucherProduct;
         }
 
         public void SetIsGiftVoucherProduct1(bool value)
         {
-            IsGiftVoucherProduct = value;
+            isGiftVoucherProduct = value;
         }
 
     }
