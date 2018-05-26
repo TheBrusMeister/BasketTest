@@ -31,15 +31,31 @@ namespace BasketTests
                 new Product(true, "Jumper", 54.65)
             };
             basket.SetBasketContents(basketProducts);
-            GiftVoucher voucher = new GiftVoucher(5.00);
-            basket.Checkout(voucher);
+            List<GiftVoucher> vouchers = new List<GiftVoucher>
+            {
+                new GiftVoucher(5.00)
+            };
+            basket.Checkout(vouchers);
             Assert.AreEqual(60.15, basket.GetBasketMinusVouchers() , 00.1 );
         }
 
         [TestMethod]
         public void CustomerCanPurchaseWithMultipleGiftVouchers()
         {
-            Assert.Fail();
+            Basket basket = new Basket();
+            List<Product> basketProducts = new List<Product>
+            {
+                new Product(true, "Hat", 10.50),
+                new Product(true, "Jumper", 54.65)
+            };
+            basket.SetBasketContents(basketProducts);
+            List<GiftVoucher> vouchers = new List<GiftVoucher>
+            {
+                new GiftVoucher(5.00),
+                new GiftVoucher(5.00)
+            };
+            basket.Checkout(vouchers);
+            Assert.AreEqual(55.15, basket.GetBasketMinusVouchers(), 00.1);
         }
 
         [TestMethod]

@@ -42,10 +42,15 @@ namespace ShoppingBasket.Entities
             basketContents = value;
         }
 
-        public void Checkout(GiftVoucher giftVoucher)
+        public void Checkout(List<GiftVoucher> giftVouchers)
         {
-            basketMinusVouchers = GetBasketPrice() - giftVoucher.GetVoucherValue();
-            Console.WriteLine("1 x £" + giftVoucher.GetVoucherValue() + " Gift Voucher " + giftVoucher.GetVoucherCode() + " applied");
+            double discountAmount = 0;
+            giftVouchers.ForEach((voucher) => discountAmount += voucher.GetVoucherValue());
+            basketMinusVouchers = GetBasketPrice() - discountAmount;
+            giftVouchers.ForEach((voucher) =>
+            {
+                Console.WriteLine("1 x £" + voucher.GetVoucherValue() + " Gift Voucher " + voucher.GetVoucherCode() + " applied");
+            });
             Console.WriteLine("Total: £" + basketMinusVouchers);
         }
 
