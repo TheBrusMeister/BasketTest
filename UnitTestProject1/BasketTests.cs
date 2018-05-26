@@ -1,4 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ShoppingBasket.Entities;
+using System.Collections.Generic;
 
 namespace BasketTests
 {
@@ -8,13 +10,30 @@ namespace BasketTests
         [TestMethod]
         public void CustomerCanPurchaseWithoutVoucher()
         {
-            Assert.Fail();
+            Basket basket = new Basket();
+            List<Product> basketProducts = new List<Product>
+            {
+                new Product(true, "Hat", 10.00),
+                new Product(true, "Jumper", 20.00)
+            };
+            basket.SetBasketContents(basketProducts);
+            basket.Checkout();
+            Assert.AreEqual(30.00, basket.GetBasketPrice() , 00.1 );
         }
 
         [TestMethod]
         public void CustomerCanPurchaseWithOneGiftVoucher()
         {
-            Assert.Fail();
+            Basket basket = new Basket();
+            List<Product> basketProducts = new List<Product>
+            {
+                new Product(true, "Hat", 10.50),
+                new Product(true, "Jumper", 54.65)
+            };
+            basket.SetBasketContents(basketProducts);
+            GiftVoucher voucher = new GiftVoucher(5.00);
+            basket.Checkout(voucher);
+            Assert.AreEqual(60.15, basket.GetBasketMinusVouchers() , 00.1 );
         }
 
         [TestMethod]

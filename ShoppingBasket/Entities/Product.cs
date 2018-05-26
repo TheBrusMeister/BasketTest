@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShoppingBasket.Entities
 {
-    class Product
+    public class Product
     {
         private bool isGiftVoucherProduct;
         private string productName;

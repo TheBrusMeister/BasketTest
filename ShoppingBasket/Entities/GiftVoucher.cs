@@ -17,6 +17,16 @@ namespace ShoppingBasket.Entities
             voucherValue = valueOfVoucher;
         }
 
+        public string GetVoucherCode()
+        {
+            return voucherCode;
+        }
+
+        public void SetVoucherCode(string value)
+        {
+            voucherCode = value;
+        }
+
         public double GetVoucherValue()
         {
             return voucherValue;
