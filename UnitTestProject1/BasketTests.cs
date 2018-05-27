@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShoppingBasket.Entities;
+using ShoppingBasket.Entities.enums;
 using System.Collections.Generic;
 
 namespace BasketTests
@@ -13,8 +14,8 @@ namespace BasketTests
             Basket basket = new Basket();
             List<Product> basketProducts = new List<Product>
             {
-                new Product(true, "Hat", 10.00),
-                new Product(true, "Jumper", 20.00)
+                new Product(true, "Hat", 10.00, Category.NONE),
+                new Product(true, "Jumper", 20.00, Category.NONE)
             };
             basket.SetBasketContents(basketProducts);
             basket.Checkout();
@@ -27,8 +28,8 @@ namespace BasketTests
             Basket basket = new Basket();
             List<Product> basketProducts = new List<Product>
             {
-                new Product(true, "Hat", 10.50),
-                new Product(true, "Jumper", 54.65)
+                new Product(true, "Hat", 10.50, Category.NONE),
+                new Product(true, "Jumper", 54.65, Category.NONE)
             };
             basket.SetBasketContents(basketProducts);
             List<GiftVoucher> vouchers = new List<GiftVoucher>
@@ -45,8 +46,8 @@ namespace BasketTests
             Basket basket = new Basket();
             List<Product> basketProducts = new List<Product>
             {
-                new Product(true, "Hat", 10.50),
-                new Product(true, "Jumper", 54.65)
+                new Product(true, "Hat", 10.50, Category.NONE),
+                new Product(true, "Jumper", 54.65, Category.NONE)
             };
             basket.SetBasketContents(basketProducts);
             List<GiftVoucher> vouchers = new List<GiftVoucher>
@@ -59,9 +60,19 @@ namespace BasketTests
         }
 
         [TestMethod]
-        public void CustomerCanPurchaseWithAThresholdVoucher()
+        public void PurchaseWithAThresholdVoucherAndBasketNotApplicable()
         {
-            Assert.Fail();
+            Basket basket = new Basket();
+            List<Product> basketProducts = new List<Product>
+            {
+                new Product(true, "Hat", 25.00, Category.NONE),
+                new Product(true, "Jumper", 26.00, Category.NONE)
+            };
+            basket.SetBasketContents(basketProducts);
+            List<GiftVoucher> vouchers = new List<GiftVoucher>();
+            OfferVoucher offer = new OfferVoucher(Category.HEADGEAR, 20, 50);
+            basket.Checkout(vouchers, offer);
+            Assert.AreEqual(51.0, basket.GetBasketPrice(), 00.1);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace ShoppingBasket.Helpers
 {
     public class StringHelper
     {
-        public static string GenerateUniqueStringToLength(int length)
+        private static string GenerateUniqueStringToLength(int length)
         {
             string result = string.Empty;
             Random random = new Random((int)DateTime.Now.Ticks);
@@ -30,6 +30,11 @@ namespace ShoppingBasket.Helpers
                 Thread.Sleep(1);
             }
             return result;
+        }
+
+        public static string GenerateVoucherCode()
+        {
+            return GenerateUniqueStringToLength(3) + "-" + GenerateUniqueStringToLength(3);
         }
     }
 }

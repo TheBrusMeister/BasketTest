@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoppingBasket.Entities.enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,12 +10,14 @@ namespace ShoppingBasket.Entities
         private bool isGiftVoucherProduct;
         private string productName;
         private double basePrice;
+        private Category productCategory;
 
-        public Product(bool isGiftVoucher, string nameOfProduct, double price)
+        public Product(bool isGiftVoucher, string nameOfProduct, double price, Category category)
         {
             isGiftVoucherProduct = isGiftVoucher;
             productName = nameOfProduct;
             basePrice = price;
+            productCategory = category;
         }
 
         public double GetBasePrice()
@@ -47,5 +50,14 @@ namespace ShoppingBasket.Entities
             isGiftVoucherProduct = value;
         }
 
+        public Category GetCategory()
+        {
+            return productCategory;
+        }
+
+        public void SetCategory(Category value)
+        {
+            productCategory = value;
+        }
     }
 }

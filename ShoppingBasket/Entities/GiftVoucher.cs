@@ -13,7 +13,7 @@ namespace ShoppingBasket.Entities
 
         public GiftVoucher(double valueOfVoucher)
         {
-            voucherCode = StringHelper.GenerateUniqueStringToLength(3) + "-" + StringHelper.GenerateUniqueStringToLength(3);
+            voucherCode = StringHelper.GenerateVoucherCode();
             voucherValue = valueOfVoucher;
         }
 
