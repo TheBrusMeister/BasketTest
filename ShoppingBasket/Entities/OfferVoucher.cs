@@ -8,11 +8,12 @@ namespace ShoppingBasket.Entities
 {
     public class OfferVoucher
     {
-        private OfferType offerType;
-        private Category offerCategory;
-        private string offerCode;
-        private int offerThreshold;
-        int offerValue;
+ 
+        public Category offerCategory { get;}
+        public string offerCode { get; }
+        public OfferType offerType { get; }
+        public int offerThreshold { get; }
+        public int offerValue { get; }
        
         public OfferVoucher(int valueOfOffer, int threshold)
         {
@@ -22,63 +23,10 @@ namespace ShoppingBasket.Entities
             offerCode = StringHelper.GenerateVoucherCode();
         }
 
-        public OfferVoucher(Category offerCat, int valueOfOffer, int threshold)
+        public OfferVoucher(Category offerCat, int valueOfOffer, int threshold) : this(valueOfOffer, threshold)
         {
             offerType = OfferType.Category;
-            offerCategory = offerCat;
-            offerValue = valueOfOffer;
-            offerThreshold = threshold;
-            offerCode = StringHelper.GenerateVoucherCode();
-        }
-
-        public Category GetOfferCategory()
-        {
-            return offerCategory;
-        }
-
-        public void SetOfferCategory(Category value)
-        {
-            offerCategory = value;
-        }
-
-        public string GetOfferCode()
-        {
-            return offerCode;
-        }
-
-        public void SetOfferCode(string value)
-        {
-            offerCode = value;
-        }
-
-        public int GetOfferThreshold()
-        {
-            return offerThreshold;
-        }
-
-        public void SetOfferThreshold(int value)
-        {
-            offerThreshold = value;
-        }
-
-        public int GetOfferValue()
-        {
-            return offerValue;
-        }
-
-        public void SetOfferValue(int value)
-        {
-            offerValue = value;
-        }
-
-        public OfferType GetOfferType()
-        {
-            return offerType;
-        }
-
-        public void SetOfferType(OfferType value)
-        {
-            offerType = value;
+            offerCategory = offerCat;           
         }
     }
 }

@@ -7,10 +7,10 @@ namespace ShoppingBasket.Entities
 {
     public class Product
     {
-        private bool isGiftVoucherProduct;
-        private string productName;
-        private double basePrice;
-        private Category productCategory;
+        public bool isGiftVoucherProduct { get; }
+        public string productName { get; }
+        public double basePrice { get; }
+        public Category productCategory { get; }
 
         public Product(bool isGiftVoucher, string nameOfProduct, double price, Category category)
         {
@@ -18,46 +18,6 @@ namespace ShoppingBasket.Entities
             productName = nameOfProduct;
             basePrice = price;
             productCategory = category;
-        }
-
-        public double GetBasePrice()
-        {
-            return basePrice;
-        }
-
-        public void SetBasePrice(double value)
-        {
-            basePrice = value;
-        }
-
-        public string GetProductName()
-        {
-            return productName;
-        }
-
-        public void SetProductName(string value)
-        {
-            productName = value;
-        }
-
-        public bool GetIsGiftVoucherProduct1()
-        {
-            return isGiftVoucherProduct;
-        }
-
-        public void SetIsGiftVoucherProduct1(bool value)
-        {
-            isGiftVoucherProduct = value;
-        }
-
-        public Category GetCategory()
-        {
-            return productCategory;
-        }
-
-        public void SetCategory(Category value)
-        {
-            productCategory = value;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace ShoppingBasket.Entities.enums
 {
     public class Category
     {
-        private string categoryName;
+        public string categoryName { get; }
 
         public Category(string nameOfCategory)
         {
@@ -16,16 +16,6 @@ namespace ShoppingBasket.Entities.enums
         public static readonly Category NONE = new Category("None");
         public static readonly Category HEADGEAR = new Category("Head Gear");
         public static readonly Category KNITWEAR = new Category("Knit Wear");
-
-        public string GetCategoryName()
-        {
-            return categoryName;
-        }
-
-        public void SetCategoryName(string value)
-        {
-            categoryName = value;
-        }
 
         public static IEnumerable<Category> Values
         {

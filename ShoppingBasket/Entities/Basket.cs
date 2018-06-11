@@ -7,74 +7,51 @@ namespace ShoppingBasket.Entities
 {
     public class Basket
     {
-        internal List<Product> basketContents;
-        private double basketPrice;
-        double basketMinusVouchers;
+        public List<Product> basketContents { get; }
+        public double basketPrice { get; set; }
+        public double basketMinusVouchers { get; set; }
         string outcomeText;
 
-        public double GetBasketMinusVouchers()
+        public Basket(List<Product> products)
         {
-            return basketMinusVouchers;
-        }
-
-        public void SetBasketMinusVouchers(double value)
-        {
-            basketMinusVouchers = value;
+            basketContents = products;
+            basketPrice = CalculateBasketPrice();
         }
 
         private double CalculateBasketPrice()
         {
             double calculateBasketPrice = 0;
-            basketContents.ForEach((item) => calculateBasketPrice += item.GetBasePrice());
+            basketContents.ForEach((item) => calculateBasketPrice += item.basePrice);
 
             return calculateBasketPrice;
-        }
-
-        public double GetBasketPrice()
-        {
-            return basketPrice;
-        }
-
-        public void SetBasketPrice(double value)
-        {
-            basketPrice = value;
-        }
-
-        internal List<Product> GetBasketContents()
-        {
-            return basketContents;
-        }
-
-        public void SetBasketContents(List<Product> value)
-        {
-            basketContents = value;
         }
 
         public void Checkout(List<GiftVoucher> giftVouchers)
         {
             double discountAmount = 0;
 
-            basketPrice = CalculateBasketPrice();
-            giftVouchers.ForEach((voucher) => discountAmount += voucher.GetVoucherValue());
-            basketMinusVouchers = GetBasketPrice() - discountAmount;
+            giftVouchers.ForEach((voucher) => discountAmount += voucher.voucherValue);
+            basketPrice = basketPrice - discountAmount;
             giftVouchers.ForEach((voucher) =>
             {
-                Console.WriteLine("1 x £" + voucher.GetVoucherValue() + " Gift Voucher " + voucher.GetVoucherCode() + " applied");
+                Console.WriteLine("1 x £" + voucher.voucherValue + " Gift Voucher " + voucher.voucherCode + " applied");
             });
-            Console.WriteLine("Total: £" + basketMinusVouchers);
+            Console.WriteLine("Total: £" + basketPrice);
         }
 
         public void Checkout(List<GiftVoucher> giftVouchers, OfferVoucher offerVoucher)
         {
             basketPrice = CalculateBasketPrice();
             OfferVoucherCalculation(offerVoucher);
-            GiftVoucherCalculation(giftVouchers);
+            if (giftVouchers.Count > 0) {
+                GiftVoucherCalculation(giftVouchers);
+            }
         }
 
         public void Checkout()
         {
             basketPrice = CalculateBasketPrice();
-            Console.WriteLine("Total: £" + GetBasketPrice());
+            Console.WriteLine("Total: £" + basketPrice);
         }
 
         private void GiftVoucherCalculation(List<GiftVoucher> giftVouchers)
@@ -87,47 +64,54 @@ namespace ShoppingBasket.Entities
             }
             else
             {
-                giftVouchers.ForEach((voucher) => discountAmount += voucher.GetVoucherValue());
+                giftVouchers.ForEach((voucher) => discountAmount += voucher.voucherValue);
                 basketPrice = basketPrice - discountAmount;
                 giftVouchers.ForEach((voucher) =>
                 {
-                    Console.WriteLine("1 x £" + voucher.GetVoucherValue() + " Gift Voucher " + voucher.GetVoucherCode() + " applied");
+                    Console.WriteLine("1 x £" + voucher.voucherValue+ " Gift Voucher " + voucher.voucherCode + " applied");
                 });
             }
         }
 
         private void OfferVoucherCalculation(OfferVoucher offerVoucher)
         {
-            if (offerVoucher.GetOfferType().Equals(OfferType.Basket))
+            if (offerVoucher.offerType.Equals(OfferType.Basket))
             {
-                if (basketPrice >= offerVoucher.GetOfferValue())
+                if (basketPrice >= offerVoucher.offerValue)
                 {
-                    basketPrice = basketPrice - offerVoucher.GetOfferValue();
+                    basketPrice = basketPrice - offerVoucher.offerValue;
                 }
             }
             else
             {
-                if (basketPrice >= offerVoucher.GetOfferThreshold())
+                if (basketPrice >= offerVoucher.offerThreshold)
                 {
+                    double discountedPrice = basketPrice;
+
                     for (int i = 0; i <= basketContents.Count; i++)
                     {
-                        
-                        if (basketContents[i].GetCategory().GetCategoryName().Equals(offerVoucher.GetOfferCategory().GetCategoryName()))
+
+                        if (basketContents[i].productCategory.categoryName.Equals(offerVoucher.offerCategory.categoryName))
                         {
-                            basketPrice = basketPrice - offerVoucher.GetOfferValue();
-                            outcomeText = "1 x £" + offerVoucher.GetOfferValue() + " off baskets over "
-                                + "£" + offerVoucher.GetOfferThreshold() + " Offer Voucher "
-                                + offerVoucher.GetOfferCode() + " applied";
+                            discountedPrice = basketPrice - basketContents[i].basePrice;
+                            outcomeText = "1 x £" + offerVoucher.offerValue + " off baskets over "
+                                + "£" + offerVoucher.offerThreshold + " Offer Voucher "
+                                + offerVoucher.offerCode + " applied";
                             Console.WriteLine(outcomeText);
                             break;
-                        }else
-                        {
-                            outcomeText = "There are no products in your basket applicable to voucher Voucher " + offerVoucher.GetOfferCode();
-                            Console.WriteLine(outcomeText);
-                            break;
-                        }
+                        }   
                     }
-                } else
+                    if ( discountedPrice.Equals(basketPrice) )
+                    {
+                        outcomeText = "There are no products in your basket applicable to voucher Voucher " + offerVoucher.offerCode;
+                        Console.WriteLine(outcomeText);
+                    } else
+                    {
+                        basketPrice = discountedPrice;
+                    }
+                                
+                }
+                else
                 {
                     outcomeText = "Calculate spend up to threshold here";
                     Console.WriteLine(outcomeText);
