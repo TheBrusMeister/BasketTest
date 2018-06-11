@@ -70,6 +70,7 @@ namespace ShoppingBasket.Entities
                 {
                     Console.WriteLine("1 x £" + voucher.voucherValue+ " Gift Voucher " + voucher.voucherCode + " applied");
                 });
+                Console.WriteLine("Total: £" + basketPrice);
             }
         }
 
@@ -80,6 +81,10 @@ namespace ShoppingBasket.Entities
                 if (basketPrice >= offerVoucher.offerValue)
                 {
                     basketPrice = basketPrice - offerVoucher.offerValue;
+                    outcomeText = "1 x £" + offerVoucher.offerValue + " off baskets over "
+                                + "£" + offerVoucher.offerThreshold + " Offer Voucher "
+                                + offerVoucher.offerCode + " applied";
+                    Console.WriteLine(outcomeText);
                 }
             }
             else
@@ -90,7 +95,10 @@ namespace ShoppingBasket.Entities
 
                     for (int i = 0; i <= basketContents.Count; i++)
                     {
-
+                        if (i >= basketContents.Count)
+                        {
+                            break;
+                        }
                         if (basketContents[i].productCategory.categoryName.Equals(offerVoucher.offerCategory.categoryName))
                         {
                             discountedPrice = basketPrice - basketContents[i].basePrice;
@@ -98,8 +106,9 @@ namespace ShoppingBasket.Entities
                                 + "£" + offerVoucher.offerThreshold + " Offer Voucher "
                                 + offerVoucher.offerCode + " applied";
                             Console.WriteLine(outcomeText);
+                            Console.WriteLine("Total: £" + discountedPrice);
                             break;
-                        }   
+                        }
                     }
                     if ( discountedPrice.Equals(basketPrice) )
                     {

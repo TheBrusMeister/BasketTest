@@ -33,7 +33,7 @@ namespace ShoppingBasket
             };
             Basket basket = new Basket(basketProducts);
             List<GiftVoucher> vouchers = new List<GiftVoucher>();
-            OfferVoucher offer = new OfferVoucher(Category.HEADGEAR,20, 50);
+            OfferVoucher offer = new OfferVoucher(Category.HEADGEAR, 20, 50);
             basket.Checkout(vouchers , offer);
         }
 
@@ -52,11 +52,44 @@ namespace ShoppingBasket
             basket.Checkout(vouchers, offer);
         }
 
+        static void Basket4()
+        {
+            Console.WriteLine("Basket 4");
+            List<Product> basketProducts = new List<Product>
+            {
+                new Product(true, "Hat", 25.00, Category.NONE),
+                new Product(true, "Jumper", 26.00, Category.NONE),
+            };
+            Basket basket = new Basket(basketProducts);
+            List<GiftVoucher> vouchers = new List<GiftVoucher>
+            {
+                new GiftVoucher(5)
+            };
+            OfferVoucher offer = new OfferVoucher(5, 50);
+            basket.Checkout(vouchers, offer);
+        }
+
+        static void Basket5()
+        {
+            Console.WriteLine("Basket 5");
+            List<Product> basketProducts = new List<Product>
+            {
+                new Product(true, "Hat", 25.00, Category.NONE),
+                new Product(true, "Gift Voucher", 30.00, Category.NONE),
+            };
+            Basket basket = new Basket(basketProducts);
+            List<GiftVoucher> vouchers = new List<GiftVoucher>();
+            OfferVoucher offer = new OfferVoucher(5, 50);
+            basket.Checkout(vouchers, offer);
+        }
+
         static void Main()
         {
             Basket1();
             Basket2();
             Basket3();
+            Basket4();
+            Basket5();
         }
     }
 }
