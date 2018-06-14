@@ -93,12 +93,8 @@ namespace ShoppingBasket.Entities
                 {
                     double discountedPrice = basketPrice;
 
-                    for (int i = 0; i <= basketContents.Count; i++)
+                    for (int i = 0; i < basketContents.Count; i++)
                     {
-                        if (i >= basketContents.Count)
-                        {
-                            break;
-                        }
                         if (basketContents[i].productCategory.categoryName.Equals(offerVoucher.offerCategory.categoryName))
                         {
                             discountedPrice = basketPrice - basketContents[i].basePrice;
