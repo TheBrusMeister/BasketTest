@@ -9,10 +9,10 @@ namespace ShoppingBasket.Entities
     {
         public bool isGiftVoucherProduct { get; }
         public string productName { get; }
-        public double basePrice { get; }
+        public decimal basePrice { get; }
         public Category productCategory { get; }
 
-        public Product(bool isGiftVoucher, string nameOfProduct, double price, Category category)
+        public Product(bool isGiftVoucher, string nameOfProduct, decimal price, Category category)
         {
             isGiftVoucherProduct = isGiftVoucher;
             productName = nameOfProduct;

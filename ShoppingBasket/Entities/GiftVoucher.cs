@@ -8,10 +8,10 @@ namespace ShoppingBasket.Entities
 {
     public class GiftVoucher
     {
-        public double voucherValue { get; }
+        public decimal voucherValue { get; }
         public string voucherCode { get; }
 
-        public GiftVoucher(double valueOfVoucher)
+        public GiftVoucher(decimal valueOfVoucher)
         {
             voucherCode = StringHelper.GenerateVoucherCode();
             voucherValue = valueOfVoucher;

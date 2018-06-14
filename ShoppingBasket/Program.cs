@@ -12,13 +12,13 @@ namespace ShoppingBasket
             Console.WriteLine("Basket 1");
             List<Product> basketProducts = new List<Product>
             {
-                new Product(true, "Hat", 10.50, Category.NONE),
-                new Product(true, "Jumper", 54.65, Category.NONE)
+                new Product(true, "Hat", 10.50m, Category.NONE),
+                new Product(true, "Jumper", 54.65m, Category.NONE)
             };
             Basket basket = new Basket(basketProducts);
             List<GiftVoucher> voucher = new List<GiftVoucher>
             {
-                new GiftVoucher(5.00)
+                new GiftVoucher(5.00m)
             };
             basket.Checkout(voucher);
         }
@@ -28,8 +28,8 @@ namespace ShoppingBasket
             Console.WriteLine("Basket 2");
             List<Product> basketProducts = new List<Product>
             {
-                new Product(true, "Hat", 25.00, Category.NONE),
-                new Product(true, "Jumper", 26.00, Category.NONE)
+                new Product(true, "Hat", 25.00m, Category.NONE),
+                new Product(true, "Jumper", 26.00m, Category.NONE)
             };
             Basket basket = new Basket(basketProducts);
             List<GiftVoucher> vouchers = new List<GiftVoucher>();
@@ -42,9 +42,9 @@ namespace ShoppingBasket
             Console.WriteLine("Basket 3");
             List<Product> basketProducts = new List<Product>
             {
-                new Product(true, "Hat", 25.00, Category.NONE),
-                new Product(true, "Jumper", 26.00, Category.NONE),
-                new Product(true, "Head Light", 3.50, Category.HEADGEAR)
+                new Product(true, "Hat", 25.00m, Category.NONE),
+                new Product(true, "Jumper", 26.00m, Category.NONE),
+                new Product(true, "Head Light", 3.50m, Category.HEADGEAR)
             };
             Basket basket = new Basket(basketProducts);
             List<GiftVoucher> vouchers = new List<GiftVoucher>();
@@ -57,8 +57,8 @@ namespace ShoppingBasket
             Console.WriteLine("Basket 4");
             List<Product> basketProducts = new List<Product>
             {
-                new Product(true, "Hat", 25.00, Category.NONE),
-                new Product(true, "Jumper", 26.00, Category.NONE),
+                new Product(true, "Hat", 25.00m, Category.NONE),
+                new Product(true, "Jumper", 26.00m, Category.NONE),
             };
             Basket basket = new Basket(basketProducts);
             List<GiftVoucher> vouchers = new List<GiftVoucher>
@@ -74,8 +74,8 @@ namespace ShoppingBasket
             Console.WriteLine("Basket 5");
             List<Product> basketProducts = new List<Product>
             {
-                new Product(true, "Hat", 25.00, Category.NONE),
-                new Product(true, "Gift Voucher", 30.00, Category.NONE),
+                new Product(true, "Hat", 25.00m, Category.NONE),
+                new Product(true, "Gift Voucher", 30.00m, Category.NONE),
             };
             Basket basket = new Basket(basketProducts);
             List<GiftVoucher> vouchers = new List<GiftVoucher>();

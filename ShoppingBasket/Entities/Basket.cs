@@ -8,8 +8,8 @@ namespace ShoppingBasket.Entities
     public class Basket
     {
         public List<Product> basketContents { get; }
-        public double basketPrice { get; set; }
-        public double basketMinusVouchers { get; set; }
+        public decimal basketPrice { get; set; }
+        public decimal basketMinusVouchers { get; set; }
         string outcomeText;
 
         public Basket(List<Product> products)
@@ -18,9 +18,9 @@ namespace ShoppingBasket.Entities
             basketPrice = CalculateBasketPrice();
         }
 
-        private double CalculateBasketPrice()
+        private decimal CalculateBasketPrice()
         {
-            double calculateBasketPrice = 0;
+            decimal calculateBasketPrice = 0;
             basketContents.ForEach((item) => calculateBasketPrice += item.basePrice);
 
             return calculateBasketPrice;
@@ -28,7 +28,7 @@ namespace ShoppingBasket.Entities
 
         public void Checkout(List<GiftVoucher> giftVouchers)
         {
-            double discountAmount = 0;
+            decimal discountAmount = 0;
 
             giftVouchers.ForEach((voucher) => discountAmount += voucher.voucherValue);
             basketPrice = basketPrice - discountAmount;
@@ -56,7 +56,7 @@ namespace ShoppingBasket.Entities
 
         private void GiftVoucherCalculation(List<GiftVoucher> giftVouchers)
         {
-            double discountAmount = 0;
+            decimal discountAmount = 0;
 
             if (giftVouchers.Count == 0)
             {
@@ -91,7 +91,7 @@ namespace ShoppingBasket.Entities
             {
                 if (basketPrice >= offerVoucher.offerThreshold)
                 {
-                    double discountedPrice = basketPrice;
+                    decimal discountedPrice = basketPrice;
 
                     for (int i = 0; i < basketContents.Count; i++)
                     {
