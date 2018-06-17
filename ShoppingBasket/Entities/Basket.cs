@@ -74,17 +74,44 @@ namespace ShoppingBasket.Entities
             }
         }
 
+        private decimal GetDiscountableProductsPrice()
+        {
+            decimal basketDiscountablePrice = 0;
+            basketContents.ForEach(pr =>
+            {
+                if (pr.isDicountable)
+                {
+                    basketDiscountablePrice += pr.basePrice;
+                }      
+            });
+            return basketDiscountablePrice;
+        }
+
+        private void CalculateSpendToDiscount(decimal discountableTotal, OfferVoucher voucher)
+        {
+            decimal spendToOfferValid = voucher.offerThreshold - discountableTotal;
+            Console.WriteLine("You have not reached the spend threshold for voucher " + voucher.offerCode
+                + ". Spend Another " + spendToOfferValid + " to receive £" + voucher.offerValue + " discount from your basket total.");
+            Console.WriteLine("Total: £" + basketPrice);
+        }
+
         private void OfferVoucherCalculation(OfferVoucher offerVoucher)
         {
+            decimal discountablePrice = GetDiscountableProductsPrice();
+
             if (offerVoucher.offerType.Equals(OfferType.Basket))
             {
-                if (basketPrice >= offerVoucher.offerValue)
+                if (discountablePrice >= offerVoucher.offerThreshold)
                 {
                     basketPrice = basketPrice - offerVoucher.offerValue;
                     outcomeText = "1 x £" + offerVoucher.offerValue + " off baskets over "
                                 + "£" + offerVoucher.offerThreshold + " Offer Voucher "
                                 + offerVoucher.offerCode + " applied";
                     Console.WriteLine(outcomeText);
+                }
+                else
+                {
+                    CalculateSpendToDiscount(discountablePrice, offerVoucher);
                 }
             }
             else
@@ -106,20 +133,14 @@ namespace ShoppingBasket.Entities
                             break;
                         }
                     }
-                    if ( discountedPrice.Equals(basketPrice) )
+                    if (discountedPrice.Equals(basketPrice) )
                     {
                         outcomeText = "There are no products in your basket applicable to voucher Voucher " + offerVoucher.offerCode;
                         Console.WriteLine(outcomeText);
                     } else
                     {
                         basketPrice = discountedPrice;
-                    }
-                                
-                }
-                else
-                {
-                    outcomeText = "Calculate spend up to threshold here";
-                    Console.WriteLine(outcomeText);
+                    }            
                 }
             }
         }

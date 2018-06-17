@@ -71,5 +71,20 @@ namespace BasketTests
             basket.Checkout(vouchers, offer);
             Assert.AreEqual(51.00m, basket.basketPrice);
         }
+
+        [TestMethod]
+        public void PurchaseGiftVoucherAndCalculateSpendToDiscount()
+        {
+            List<Product> basketProducts = new List<Product>
+            {
+                new Product(true, "Hat", 25.00m, Category.NONE),
+                new Product(false, "Gift Voucher", 30.00m, Category.NONE),
+            };
+            Basket basket = new Basket(basketProducts);
+            List<GiftVoucher> vouchers = new List<GiftVoucher>();
+            OfferVoucher offer = new OfferVoucher(5, 50);
+            basket.Checkout(vouchers, offer);
+            Assert.AreEqual(55.00m, basket.basketPrice);
+        }
     }
 }

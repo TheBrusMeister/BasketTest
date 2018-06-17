@@ -75,7 +75,7 @@ namespace ShoppingBasket
             List<Product> basketProducts = new List<Product>
             {
                 new Product(true, "Hat", 25.00m, Category.NONE),
-                new Product(true, "Gift Voucher", 30.00m, Category.NONE),
+                new Product(false, "Gift Voucher", 30.00m, Category.NONE),
             };
             Basket basket = new Basket(basketProducts);
             List<GiftVoucher> vouchers = new List<GiftVoucher>();

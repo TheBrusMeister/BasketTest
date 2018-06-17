@@ -7,14 +7,14 @@ namespace ShoppingBasket.Entities
 {
     public class Product
     {
-        public bool isGiftVoucherProduct { get; }
+        public bool isDicountable { get; }
         public string productName { get; }
         public decimal basePrice { get; }
         public Category productCategory { get; }
 
-        public Product(bool isGiftVoucher, string nameOfProduct, decimal price, Category category)
+        public Product(bool canDiscount, string nameOfProduct, decimal price, Category category)
         {
-            isGiftVoucherProduct = isGiftVoucher;
+            isDicountable = canDiscount;
             productName = nameOfProduct;
             basePrice = price;
             productCategory = category;
