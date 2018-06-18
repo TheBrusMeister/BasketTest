@@ -89,9 +89,9 @@ namespace ShoppingBasket.Entities
 
         private void CalculateSpendToDiscount(decimal discountableTotal, OfferVoucher voucher)
         {
-            decimal spendToOfferValid = voucher.offerThreshold - discountableTotal;
+            decimal spendToOfferValid = voucher.offerThreshold - discountableTotal + 0.01m;
             Console.WriteLine("You have not reached the spend threshold for voucher " + voucher.offerCode
-                + ". Spend Another " + spendToOfferValid + " to receive £" + voucher.offerValue + " discount from your basket total.");
+                + ". Spend Another £" + spendToOfferValid + " to receive £" + voucher.offerValue + " discount from your basket total.");
             Console.WriteLine("Total: £" + basketPrice);
         }
 
